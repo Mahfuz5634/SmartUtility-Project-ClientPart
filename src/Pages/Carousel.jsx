@@ -49,6 +49,9 @@ const CarouselPart = () => {
                 alt="Utility illustration"
                 className="rounded-xl h-[300px] sm:h-[340px] md:h-[380px] lg:h-[400px] w-full object-contain p-4"
               />
+              <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 bg-black/60 text-white px-4 py-2 rounded-lg text-center shadow-lg backdrop-blur-sm">
+                <p className="text-lg font-semibold">Use Power Wisely</p>
+              </div>
             </div>
             <div>
               <img
@@ -56,6 +59,9 @@ const CarouselPart = () => {
                 alt="Bill illustration"
                 className="rounded-xl h-[300px] sm:h-[340px] md:h-[380px] lg:h-[400px] w-full object-contain p-4"
               />
+              <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 bg-black/60 text-white px-4 py-2 rounded-lg text-center shadow-lg backdrop-blur-sm">
+                <p className="text-lg font-semibold">Light Smart, Live Smart</p>
+              </div>
             </div>
             <div>
               <img
@@ -63,7 +69,11 @@ const CarouselPart = () => {
                 alt="Gas and water utility"
                 className="rounded-xl h-[300px] sm:h-[340px] md:h-[380px] lg:h-[400px] w-full object-contain  p-4"
               />
+              <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 bg-black/60 text-white px-4 py-2 rounded-lg text-center shadow-lg backdrop-blur-sm">
+                <p className="text-lg font-semibold">Switch Off. Save Power.</p>
+              </div>
             </div>
+        
           </Carousel>
         </div>
       </div>
