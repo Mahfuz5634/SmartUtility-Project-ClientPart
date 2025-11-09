@@ -7,7 +7,7 @@ import img3 from "../assets/utility-bills-household-services-online-regular-paym
 
 const CarouselPart = () => {
   return (
-    <div className="py-16">
+    <div className="py-7">
       <div className="max-w-6xl mx-auto px-6 flex flex-col lg:flex-row items-center gap-10">
         {/* Left Side: Text Section */}
         <div className="flex-1 text-center lg:text-left">

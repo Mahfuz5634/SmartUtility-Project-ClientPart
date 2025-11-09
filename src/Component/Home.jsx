@@ -2,6 +2,7 @@ import React from "react";
 import ImageCarousel from "../Pages/Carousel";
 import { Carousel } from "react-responsive-carousel";
 import CarouselPart from "../Pages/Carousel";
+import CategoryCard from "../Pages/CategoryCard";
 
 
 const Home = () => {
@@ -9,6 +10,7 @@ const Home = () => {
     <div className=" w-full ">
      <div className="container mx-auto">
         <CarouselPart></CarouselPart>
+        <CategoryCard></CategoryCard>
      </div>
     </div>
   );
