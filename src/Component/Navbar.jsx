@@ -1,12 +1,14 @@
 
 import React from 'react';
-import { Link } from 'react-router';
+import { FcBrokenLink } from 'react-icons/fc';
+import { Link, NavLink } from 'react-router';
 
 
 const Navbar = () => {
       const link=<>
-         <Link className='mr-3'>Home</Link>
-         <Link>Bills</Link>
+         <Link className='lg:mr-4 font-serif font-bold text-[#101828]'>Home</Link>
+         <Link className='lg:mr-4 font-serif font-bold text-[#101828]' >Bills</Link>
+         <NavLink className='lg:mr-4 font-serif font-bold text-[#101828]'>My Pay Bills</NavLink>
 
         </>
     return (
@@ -24,9 +26,11 @@ const Navbar = () => {
       {link}
       </ul>
     </div>
-   <div>
-    
-     <a className="text-xl font-bold ">SmartUtility</a>
+   <div className='flex justify-center items-center gap-1'>
+    <div>
+      <span className='text-2xl'> <FcBrokenLink /></span>
+    </div>
+     <a className="lg:text-2xl font-bold ">Smart<span className='text-[#023e8a]'>Utility</span></a>
    </div>
   </div>
   <div className="navbar-center hidden lg:flex">
@@ -35,7 +39,10 @@ const Navbar = () => {
     </ul>
   </div>
   <div className="navbar-end">
-    <a className="btn">Button</a>
+    <a className="btn mr-2 bg-[#0077b6] text-white font-bold font-serif hover:scale-105 ">Login</a>
+    <a className="btn mr-2 bg-[#00b4d8] text-white font-bold font-serif hover:scale-105">Register</a>
+     <a className="btn mr-2 bg-[#0077b6] text-white font-bold font-serif hover:scale-105 ">Logout</a>
+
   </div>
 </div>
         </div>
