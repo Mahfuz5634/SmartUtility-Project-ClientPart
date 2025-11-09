@@ -16,7 +16,7 @@ const CarouselPart = () => {
           </h1>
           <p className="mt-4 text-gray-600 text-lg leading-relaxed">
             Easily monitor and pay your{" "}
-            <span className="font-semibold text-blue-600">
+            <span className="font-semibold text-[#023e8a]">
               electricity, water, and gas
             </span>{" "}
             bills in one place. Simple. Secure. Smart.
@@ -71,19 +71,19 @@ const CarouselPart = () => {
       {/* Bottom Features */}
       <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-6 mt-8 text-gray-700 px-4">
         <div className="bg-white p-5 rounded-xl shadow hover:shadow-lg transition text-center">
-          <h3 className="text-xl font-semibold text-blue-700 mb-1">
+          <h3 className="text-xl font-semibold text-[#0077b6] mb-1">
             ⚡ Easy Billing
           </h3>
           <p>Pay all your bills from one dashboard within seconds.</p>
         </div>
         <div className="bg-white p-5 rounded-xl shadow hover:shadow-lg transition text-center">
-          <h3 className="text-xl font-semibold text-blue-700 mb-1">
+          <h3 className="text-xl font-semibold text-[#0077b6]  mb-1">
             💧 Utility Tracking
           </h3>
           <p>Track your monthly usage for electricity, gas, and water.</p>
         </div>
         <div className="bg-white p-5 rounded-xl shadow hover:shadow-lg transition text-center">
-          <h3 className="text-xl font-semibold text-blue-700 mb-1">
+          <h3 className="text-xl font-semibold text-[#0077b6]  mb-1">
             🔒 Secure Payment
           </h3>
           <p>Your transactions are encrypted and 100% safe.</p>
