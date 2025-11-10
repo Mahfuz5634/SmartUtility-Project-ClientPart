@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router";
 
 const BillsCardSection = () => {
   const [bills, setBills] = useState([]);
+  
 
   useEffect(() => {
     fetch("http://localhost:3000/recentbill") 
@@ -33,9 +35,9 @@ const BillsCardSection = () => {
             </p>
             <p className="text-sm text-gray-500 mb-4">Date: {bill.date}</p>
 
-            <button className="bg-[#0077b6] hover:bg-[#0076b6bf] text-white text-sm font-semibold py-2 px-4 rounded-lg">
+            <Link to={`/billdetails/${bill._id}`} className="bg-[#0077b6] hover:bg-[#0076b6bf] text-white text-sm font-semibold py-2 px-4 rounded-lg">
               See Details
-            </button>
+            </Link>
           </div>
         ))}
       </div>

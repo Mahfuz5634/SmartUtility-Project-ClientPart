@@ -1,7 +1,9 @@
+import Button from "daisyui/components/button";
 import React, { useEffect, useState } from "react";
+import { Link, Links } from "react-router";
 
 const BillsPage = () => {
-  const [bills, setBills] = useState([]); // you'll fill this from MongoDB later
+  const [bills, setBills] = useState([]); 
 
    useEffect(() => {
       fetch("http://localhost:3000/allbill") 
@@ -46,9 +48,11 @@ const BillsPage = () => {
               </p>
 
               {/* Button */}
-              <button className="w-full bg-[#0077b6] text-white py-2 rounded-lg font-medium hover:bg-blue-700 transition">
+             <Link to={`/billdetails/${bill._id}`}>
+              <button className="w-full bg-[#0077b6] text-white py-2 rounded-lg font-medium hover:bg-[#0076b6ce] transition">
                 See Details
               </button>
+             </Link>
             </div>
           </div>
         ))}

@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router";
 import MainLayout from "../Layout/MainLayout";
 import Home from "../Component/Home";
 import BillsPage from "../Pages/BillsPage";
+import BillsDetails from "../Pages/BillsDetails";
 
 
 
@@ -18,6 +19,11 @@ export const router =createBrowserRouter([
                 path:'/allbills',
                 Component:BillsPage
             }
+        ,
+        {
+            path:'/billdetails/:id',
+            Component:BillsDetails
+        }
         ]
     },
 ])
