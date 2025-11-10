@@ -1,8 +1,10 @@
 import React from "react";
 import { FcBrokenLink } from "react-icons/fc";
-import { Link, NavLink } from "react-router";
+import { Link, Links, NavLink } from "react-router";
+import { AuthContext } from "../Context Api/AuthContext";
 
 const Navbar = () => {
+ 
   const link = (
     <>
       <NavLink
@@ -84,9 +86,9 @@ const Navbar = () => {
           <ul className="menu menu-horizontal px-1">{link}</ul>
         </div>
         <div className="navbar-end">
-          <a className="btn mr-2 bg-[#0077b6] text-white font-bold font-serif hover:scale-105 ">
+          <Link to={'/login'} className="btn mr-2 bg-[#0077b6] text-white font-bold font-serif hover:scale-105 ">
             Login
-          </a>
+          </Link>
           <a className="btn mr-2 bg-[#00b4d8] text-white font-bold font-serif hover:scale-105">
             Register
           </a>
