@@ -101,7 +101,7 @@ const RegisterPage = () => {
         <div className="card w-full max-w-sm bg-white shadow-2xl rounded-2xl">
           <div className="card-body">
             <h2 className="text-2xl font-bold text-center mb-4">
-              Register at KidzCorner
+              Login to Smart<span className="text-[#023e8a]">Utility</span>
             </h2>
             <form onSubmit={handlesignin}>
                 
