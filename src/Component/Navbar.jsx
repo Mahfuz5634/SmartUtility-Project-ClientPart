@@ -7,7 +7,7 @@ import { Link, NavLink } from 'react-router';
 const Navbar = () => {
       const link=<>
          <Link className='lg:mr-4 font-serif font-bold text-[#101828]'>Home</Link>
-         <Link className='lg:mr-4 font-serif font-bold text-[#101828]' >Bills</Link>
+         <Link to={'/allbills'} className='lg:mr-4 font-serif font-bold text-[#101828]' >Bills</Link>
          <NavLink className='lg:mr-4 font-serif font-bold text-[#101828]'>My Pay Bills</NavLink>
 
         </>
