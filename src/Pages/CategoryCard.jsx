@@ -4,7 +4,7 @@ const CategoryCard = () => {
   return (
     <div>
       {/* Category Cards */}
-      <div className="max-w-6xl mx-auto mt-5 pb-6">
+      <div className="max-w-7xl mx-auto mt-5 pb-6">
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">
           Explore Our Utility Categories
         </h2>
