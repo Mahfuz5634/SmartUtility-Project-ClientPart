@@ -3,11 +3,11 @@ import React, { useContext, useState } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../Context Api/AuthContext";
 import { toast } from "react-toastify";
-import { GoogleAuthProvider } from "firebase/auth";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 const provider = new GoogleAuthProvider();
 
 const Login = () => {
-  const { LogInFunc, auth, setemail,signInWithPopup } = useContext(AuthContext);
+  const { LogInFunc, auth, setemail } = useContext(AuthContext);
   const navigate =useNavigate();
  const location= useLocation();
   const [see, setsee] = useState(false);
