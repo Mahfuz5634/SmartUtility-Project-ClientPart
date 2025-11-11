@@ -61,7 +61,7 @@ const Login = () => {
             </h2>
             <form onSubmit={handlelogin}>
               <div className="form-control">
-                <label className="label font-semibold">Email</label>
+                <label className="label  font-semibold">Email</label>
                 <input
                   name="email"
                   onChange={(e) => setemail(e.target.value)}
