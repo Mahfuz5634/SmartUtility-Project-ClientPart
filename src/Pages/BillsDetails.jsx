@@ -47,6 +47,7 @@ const BillsDetails = () => {
       email: user?.email || "user@example.com",
       billId: data?._id || id,
       amount: data?.amount,
+      category:data?.category,
       username: form.username.value.trim(),
       address: form.address.value.trim(),
       phone: form.phone.value.trim(),
@@ -184,6 +185,17 @@ const BillsDetails = () => {
               <input
                 type="text"
                 value={data?.amount || ""}
+                readOnly
+                className="input input-bordered w-full mt-1 bg-gray-100 cursor-not-allowed"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                Category
+              </label>
+              <input
+                type="text"
+                value={data?.category || ""}
                 readOnly
                 className="input input-bordered w-full mt-1 bg-gray-100 cursor-not-allowed"
               />

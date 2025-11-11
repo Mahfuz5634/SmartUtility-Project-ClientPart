@@ -140,8 +140,8 @@ const MyPayBills = () => {
     >
       <div>
         <title>SmartUtility-MyBill</title>
-        <h1 className="text-2xl sm:text-3xl font-bold text-center mb-6 text-[#0077b6]">
-          My Paid Bills
+        <h1 className="text-2xl sm:text-3xl font-bold text-center mb-6">
+         My Paid <span className="text-[#023e8a]">Bills</span>
         </h1>
 
         {/* Cards */}
@@ -184,6 +184,7 @@ const MyPayBills = () => {
                     "Username",
                     "Email",
                     "Amount",
+                     "Category",
                     "Address",
                     "Phone",
                     "Date",
@@ -203,6 +204,7 @@ const MyPayBills = () => {
                     <td className="border-t px-4 py-3 text-green-700 font-semibold">
                       ৳{bill.amount}
                     </td>
+                    <td className="border-t px-4 py-3">{bill.category}</td>
                     <td className="border-t px-4 py-3">{bill.address}</td>
                     <td className="border-t px-4 py-3">{bill.phone}</td>
                     <td className="border-t px-4 py-3">{bill.date}</td>
