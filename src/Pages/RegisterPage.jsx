@@ -98,7 +98,7 @@ const RegisterPage = () => {
     <div className="container mx-auto flex flex-col justify-center items-center min-h-screen">
          <title>SmartUtility-Register</title>
       <div className="hero w-full max-w-4xl">
-        <div className="card w-full max-w-sm bg-white shadow-2xl rounded-2xl">
+        <div className="card w-full max-w-sm bg-white dark:bg-black shadow-2xl rounded-2xl">
           <div className="card-body">
             <h2 className="text-2xl font-bold text-center mb-4">
               Login to Smart<span className="text-[#023e8a]">Utility</span>
@@ -163,7 +163,7 @@ const RegisterPage = () => {
             </form>
 
             {/* Google Login */}
-            <button onClick={googlesignin} className="btn bg-white text-black border-[#e5e5e5] ">
+            <button onClick={googlesignin} className="btn bg-white  text-black border-[#e5e5e5] ">
               <svg
                 aria-label="Google logo"
                 width="16"

@@ -54,9 +54,9 @@ const Login = () => {
     <div className="container mx-auto flex flex-col justify-center items-center">
       <title>SmartUtility-Login</title>
       <div className="hero w-full max-w-4xl ">
-        <div className="card w-full max-w-sm bg-white shadow-2xl rounded-2xl">
+        <div className="card w-full max-w-sm bg-white shadow-2xl rounded-2xl dark:bg-black">
           <div className="card-body">
-            <h2 className="text-2xl font-bold text-center mb-4">
+            <h2 className="text-2xl font-bold text-center mb-4  ">
               Login to Smart<span className="text-[#023e8a]">Utility</span>
             </h2>
             <form onSubmit={handlelogin}>

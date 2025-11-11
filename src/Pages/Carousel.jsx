@@ -46,7 +46,7 @@ const CarouselPart = () => {
             showThumbs={false}
             showStatus={false}
             interval={3000}
-            className="rounded-xl overflow-hidden"
+            className="rounded-xl overflow-hidden dark:bg-[#1d232a]"
           >
             <div>
               <img
