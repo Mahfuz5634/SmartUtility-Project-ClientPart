@@ -157,7 +157,7 @@ const RegisterPage = () => {
             <p className="text-rose-400">{error}</p>
 
             {/* Register Button */}
-            <button type="submit" className="btn btn-gradient btn-block mt-6 bg-gradient-to-r from-[#F2994A] to-[#F2C94C] text-white font-bold hover:from-[#F2C94C] hover:to-[#F2994A] transition-all">
+            <button type="submit" className="btn btn-gradient btn-block mt-6 bg-gradient-to-r from-[#00b4d8] to-[#90e0ef] text-white font-bold hover:scale-102 transition-all">
               Register
             </button>
             </form>

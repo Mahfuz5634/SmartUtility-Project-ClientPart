@@ -96,7 +96,7 @@ const Login = () => {
                 </NavLink>
               </label>
 
-              <button className="btn btn-gradient btn-block mt-6 bg-gradient-to-r from-[#F2994A] to-[#F2C94C] text-white font-bold hover:from-[#F2C94C] hover:to-[#F2994A] transition-all">
+              <button className="btn btn-gradient btn-block mt-6 bg-gradient-to-r from-[#00b4d8] to-[#90e0ef] text-white font-bold hover:scale-103 transition-all">
                 Login
               </button>
             </form>
