@@ -7,6 +7,7 @@ import Login from "../Pages/Login";
 import RegisterPage from "../Pages/RegisterPage";
 import PrivateRoute from "../Pages/PrivateRoutes";
 import ForgetPass from "../Pages/ForgetPass";
+import MyPayBills from "../Pages/MyPayBills";
 
 export const router = createBrowserRouter([
   {
@@ -40,6 +41,9 @@ export const router = createBrowserRouter([
       {
         path:'/forget-pass',
         Component:ForgetPass,
+      },{
+        path:'//mypaybills',
+        Component:MyPayBills
       }
     ],
   },
