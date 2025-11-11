@@ -42,8 +42,8 @@ const Navbar = () => {
       >
         Bills
       </NavLink>
-
-      <NavLink
+      {
+        loading?<span className="loading loading-spinner w-[15px] text-info "></span>:user? <NavLink
         to="/mypaybills"
         className={({ isActive }) =>
           `lg:mr-4 font-serif font-bold ${
@@ -52,6 +52,17 @@ const Navbar = () => {
         }
       >
         My Pay Bills
+      </NavLink>:" "
+      }
+      <NavLink
+        to="/faq"
+        className={({ isActive }) =>
+          `lg:mr-4 font-serif font-bold ${
+            isActive ? "text-[#0077b6] underline" : "text-[#101828]"
+          }`
+        }
+      >
+        FAQ
       </NavLink>
     </>
   );

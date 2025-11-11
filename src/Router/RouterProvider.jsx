@@ -8,6 +8,8 @@ import RegisterPage from "../Pages/RegisterPage";
 import PrivateRoute from "../Pages/PrivateRoutes";
 import ForgetPass from "../Pages/ForgetPass";
 import MyPayBills from "../Pages/MyPayBills";
+import FAQComponent from "../Pages/FaqComponent";
+import NotFound from "../Pages/NotFound";
 
 export const router = createBrowserRouter([
   {
@@ -43,8 +45,17 @@ export const router = createBrowserRouter([
         Component:ForgetPass,
       },{
         path:'//mypaybills',
-        Component:MyPayBills
-      }
+        element:<PrivateRoute><MyPayBills></MyPayBills></PrivateRoute>
+      },{
+        path:'/faq',
+        Component:FAQComponent
+      },
+
+      
     ],
   },
+  {
+    path:'*',
+    Component:NotFound
+  }
 ]);

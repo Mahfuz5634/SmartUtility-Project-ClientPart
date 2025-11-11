@@ -32,13 +32,12 @@ const MyPayBills = () => {
       });
   }, [user]);
 
-  if (!user)
-    return (
-      <p className="text-center mt-20 text-lg text-gray-500">Please log in</p>
-    );
+  
   if (loading)
     return (
-      <p className="text-center mt-20 text-lg text-gray-500">Loading...</p>
+      <><div className="conatiner mx-auto flex justify-center items-center">
+        <span className="loading loading-spinner text-info "></span>
+        </div></>
     );
 
   const totalBills = data.length;
@@ -75,6 +74,7 @@ const MyPayBills = () => {
   return (
     <Slide direction="up" duration={800} triggerOnce className="max-w-6xl mx-auto mt-8 px-4">
       <div>
+        <title>SmartUtility-MyBill</title>
         <h1 className="text-2xl sm:text-3xl font-bold text-center mb-6 text-[#0077b6]">
           My Paid Bills
         </h1>
