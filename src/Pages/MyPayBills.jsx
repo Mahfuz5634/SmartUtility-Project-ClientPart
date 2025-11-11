@@ -13,11 +13,15 @@ import {
 import { Slide } from "react-awesome-reveal";
 import Swal from "sweetalert2";
 
+
+
+
 const MyPayBills = () => {
   const { user } = useContext(AuthContext);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [load,setload]= useState(false);
+  const [load, setLoad] = useState(false);
+  const [selectedBill, setSelectedBill] = useState(null);
 
   useEffect(() => {
     if (!user?.email) return;
@@ -32,14 +36,13 @@ const MyPayBills = () => {
         console.error(err);
         setLoading(false);
       });
-  }, [user,load]);
+  }, [user, load]);
 
-  
   if (loading)
     return (
-      <><div className="conatiner mx-auto flex justify-center items-center">
+      <div className="conatiner mx-auto flex justify-center items-center">
         <span className="loading loading-spinner text-info "></span>
-        </div></>
+      </div>
     );
 
   const totalBills = data.length;
@@ -65,42 +68,76 @@ const MyPayBills = () => {
       headStyles: { fillColor: [0, 119, 182], textColor: 255 },
     });
 
-    doc.setFontSize(14);
     const finalY = doc.lastAutoTable.finalY + 20;
+    doc.setFontSize(14);
     doc.text(`Total Bills Paid: ${totalBills}`, 40, finalY);
     doc.text(`Total Amount: ${totalAmount.toLocaleString()}`, 40, finalY + 20);
 
     doc.save("my_payments_report.pdf");
   };
 
-  const deleteItems=(id)=>{
-    console.log(id);
+  const deleteItems = (id) => {
     Swal.fire({
-  title: "Are you sure?",
-  text: "You won't be able to revert this!",
-  icon: "warning",
-  showCancelButton: true,
-  confirmButtonColor: "#3085d6",
-  cancelButtonColor: "#d33",
-  confirmButtonText: "Yes, delete it!"
-}).then((result) => {
-  if (result.isConfirmed) {
-    Swal.fire({
-      title: "Deleted!",
-      text: "Your file has been deleted.",
-      icon: "success"
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`http://localhost:3000/bills/${id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then(() => setLoad(!load));
+        Swal.fire("Deleted!", "Your file has been deleted.", "success");
+      }
     });
-    fetch(`http://localhost:3000/bills/${id}`,{
-      method:'DELETE',
+  };
+
+  const handleUpdateClick = (bill) => {
+    setSelectedBill(bill);
+    document.getElementById("update_modal").showModal();
+  };
+
+  const handleUpdateSubmit = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const updatedBill = {
+      ...selectedBill,
+      username: form.username.value,
+      address: form.address.value,
+      phone: form.phone.value,
+      amount: Number(form.amount.value),
+      date: form.date.value,
+    };
+
+    console.log(updatedBill);
+
+    fetch(`http://localhost:3000/bills/${selectedBill._id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(updatedBill),
     })
-    .then(res=>res.json())
-    .then(setload(!load))
-  }
-});
-  }
+      .then((res) => res.json())
+      .then(() => {
+        toast.success("Bill updated successfully!");
+        setLoad(!load);
+        setSelectedBill(null);
+        document.getElementById("update_modal").close();
+      })
+      .catch((err) => console.error(err));
+  };
 
   return (
-    <Slide direction="up" duration={800} triggerOnce className="max-w-6xl mx-auto mt-8 px-4">
+    <Slide
+      direction="up"
+      duration={800}
+      triggerOnce
+      className="max-w-6xl mx-auto mt-8 px-4"
+    >
       <div>
         <title>SmartUtility-MyBill</title>
         <h1 className="text-2xl sm:text-3xl font-bold text-center mb-6 text-[#0077b6]">
@@ -133,7 +170,7 @@ const MyPayBills = () => {
           </button>
         </div>
 
-        {/* Table for tablet+ */}
+        {/* Table */}
         <div className="hidden md:block overflow-x-auto rounded-lg shadow-lg bg-white">
           {data.length === 0 ? (
             <p className="text-center p-10 text-gray-500 text-sm">
@@ -171,13 +208,13 @@ const MyPayBills = () => {
                     <td className="border-t px-4 py-3">{bill.date}</td>
                     <td className="border-t px-4 py-3 flex flex-col sm:flex-row sm:items-center gap-2">
                       <button
-                        onClick={() => toast.info("Update coming soon")}
+                        onClick={() => handleUpdateClick(bill)}
                         className="flex items-center gap-1 bg-[#0096d6] text-white hover:bg-[#0077b6] px-3 py-1 rounded"
                       >
                         <FaEdit /> Update
                       </button>
                       <button
-                       onClick={() => deleteItems(bill._id)}
+                        onClick={() => deleteItems(bill._id)}
                         className="flex items-center gap-1 bg-red-500 text-white hover:bg-red-600 px-3 py-1 rounded"
                       >
                         <FaTrash /> Delete
@@ -190,7 +227,7 @@ const MyPayBills = () => {
           )}
         </div>
 
-        {/* Card view for mobile */}
+        {/* Mobile view */}
         <div className="md:hidden flex flex-col gap-4">
           {data.length === 0 ? (
             <p className="text-center p-6 text-gray-500 text-sm">
@@ -214,14 +251,14 @@ const MyPayBills = () => {
                 <div className="text-gray-500 text-sm">{bill.date}</div>
                 <div className="flex gap-2 mt-2">
                   <button
-                    onClick={() => toast.info("Update coming soon")}
-                    className="flex-1 flex items-center justify-center gap-1 bg-[#0096d6] text-white hover:bg-[#0077b6 px-3  py-2 rounded"
+                    onClick={() => handleUpdateClick(bill)}
+                    className="flex-1 flex items-center justify-center gap-1 bg-[#0096d6] text-white hover:bg-[#0077b6] px-3 py-2 rounded"
                   >
                     <FaEdit /> Update
                   </button>
                   <button
                     onClick={() => deleteItems(bill._id)}
-                    className="flex-1 flex items-center justify-center gap-1 bg-red-500 text-white hover:bg-red-600 px-3  py-2 rounded"
+                    className="flex-1 flex items-center justify-center gap-1 bg-red-500 text-white hover:bg-red-600 px-3 py-2 rounded"
                   >
                     <FaTrash /> Delete
                   </button>
@@ -230,6 +267,114 @@ const MyPayBills = () => {
             ))
           )}
         </div>
+
+        {/* Update Modal */}
+        <dialog
+          id="update_modal"
+          className="modal modal-bottom sm:modal-middle"
+        >
+          <div className="modal-box">
+            <h3 className="font-bold text-lg mb-4 text-center text-[#0077b6]">
+              Update Bill
+            </h3>
+
+            {selectedBill && (
+              <form
+                onSubmit={handleUpdateSubmit}
+                className="flex flex-col gap-3"
+              >
+                {/* Username */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">
+                    Username
+                  </label>
+                  <input
+                    type="text"
+                    name="username"
+                    defaultValue={selectedBill.username}
+                    required
+                    className="input input-bordered w-full mt-1"
+                  />
+                </div>
+
+                {/* Amount */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">
+                    Amount (BDT)
+                  </label>
+                  <input
+                    type="number"
+                    name="amount"
+                    defaultValue={selectedBill.amount}
+                    required
+                    className="input input-bordered w-full mt-1"
+                  />
+                </div>
+
+                {/* Address */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">
+                    Address
+                  </label>
+                  <input
+                    type="text"
+                    name="address"
+                    defaultValue={selectedBill.address}
+                    required
+                    className="input input-bordered w-full mt-1"
+                  />
+                </div>
+
+                {/* Phone */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">
+                    Phone
+                  </label>
+                  <input
+                    type="tel"
+                    name="phone"
+                    defaultValue={selectedBill.phone}
+                    required
+                    className="input input-bordered w-full mt-1"
+                  />
+                </div>
+
+                {/* Date */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">
+                    Date
+                  </label>
+                  <input
+                    name="date"
+                    defaultValue={selectedBill.date}
+                    required
+                    className="input input-bordered w-full mt-1"
+                  />
+                </div>
+
+                {/* Actions */}
+                <div className="modal-action flex justify-end gap-2">
+                  <button
+                    type="button"
+                    className="btn btn-outline"
+                    onClick={() => {
+                      document.getElementById("update_modal").close();
+                      setSelectedBill(null);
+                    }}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="btn bg-[#0077b6] text-white hover:bg-[#005f8c]"
+                  >
+                    Update
+                  </button>
+                </div>
+              </form>
+            )}
+          </div>
+        </dialog>
       </div>
     </Slide>
   );
