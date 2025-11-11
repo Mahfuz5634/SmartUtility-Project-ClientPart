@@ -11,11 +11,13 @@ import {
   FaTrash,
 } from "react-icons/fa";
 import { Slide } from "react-awesome-reveal";
+import Swal from "sweetalert2";
 
 const MyPayBills = () => {
   const { user } = useContext(AuthContext);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [load,setload]= useState(false);
 
   useEffect(() => {
     if (!user?.email) return;
@@ -30,7 +32,7 @@ const MyPayBills = () => {
         console.error(err);
         setLoading(false);
       });
-  }, [user]);
+  }, [user,load]);
 
   
   if (loading)
@@ -70,6 +72,32 @@ const MyPayBills = () => {
 
     doc.save("my_payments_report.pdf");
   };
+
+  const deleteItems=(id)=>{
+    console.log(id);
+    Swal.fire({
+  title: "Are you sure?",
+  text: "You won't be able to revert this!",
+  icon: "warning",
+  showCancelButton: true,
+  confirmButtonColor: "#3085d6",
+  cancelButtonColor: "#d33",
+  confirmButtonText: "Yes, delete it!"
+}).then((result) => {
+  if (result.isConfirmed) {
+    Swal.fire({
+      title: "Deleted!",
+      text: "Your file has been deleted.",
+      icon: "success"
+    });
+    fetch(`http://localhost:3000/bills/${id}`,{
+      method:'DELETE',
+    })
+    .then(res=>res.json())
+    .then(setload(!load))
+  }
+});
+  }
 
   return (
     <Slide direction="up" duration={800} triggerOnce className="max-w-6xl mx-auto mt-8 px-4">
@@ -149,7 +177,7 @@ const MyPayBills = () => {
                         <FaEdit /> Update
                       </button>
                       <button
-                        onClick={() => toast.info("Delete feature coming soon")}
+                       onClick={() => deleteItems(bill._id)}
                         className="flex items-center gap-1 bg-red-500 text-white hover:bg-red-600 px-3 py-1 rounded"
                       >
                         <FaTrash /> Delete
@@ -192,7 +220,7 @@ const MyPayBills = () => {
                     <FaEdit /> Update
                   </button>
                   <button
-                    onClick={() => toast.info("Delete feature coming soon")}
+                    onClick={() => deleteItems(bill._id)}
                     className="flex-1 flex items-center justify-center gap-1 bg-red-500 text-white hover:bg-red-600 px-3  py-2 rounded"
                   >
                     <FaTrash /> Delete
