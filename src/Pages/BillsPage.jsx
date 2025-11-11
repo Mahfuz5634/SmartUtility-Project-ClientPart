@@ -61,12 +61,12 @@ const BillsPage = () => {
           {bills.map((bill) => (
             <div
               key={bill._id}
-              className="bg-white rounded-xl shadow-lg hover:shadow-xl transition duration-300 overflow-hidden"
+              className="bg-white w-[300px] rounded-xl shadow-lg hover:shadow-xl transition duration-300 overflow-hidden"
             >
               <img
                 src={bill.image}
                 alt={bill.title}
-                className="w-full h-48 object-contain bg-gray-50"
+                className="w-full h-48  bg-gray-50 rounded-md"
               />
 
               <div className="p-4">
