@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router";
+import { AuthContext } from "../Context Api/AuthContext";
 
 const BillsCardSection = () => {
+  const {loading}=useContext(AuthContext);
   const [bills, setBills] = useState([]);
   
 
@@ -13,7 +15,8 @@ const BillsCardSection = () => {
   }, []);
 
   return (
-    <div className="px-4 py-10">
+   
+    loading ? <div className="container mx-auto flex justify-center items-center"><span className="loading loading-spinner text-info"></span></div> : <div className="px-4 py-10">
       <h2 className="text-3xl font-bold text-center mb-8 text-[#101828]">
         Recent Bills
       </h2>
@@ -42,6 +45,7 @@ const BillsCardSection = () => {
         ))}
       </div>
     </div>
+   
   );
 };
 

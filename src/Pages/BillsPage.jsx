@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Slide } from "react-awesome-reveal";
 import { Link } from "react-router";
+import { AuthContext } from "../Context Api/AuthContext";
 
 const BillsPage = () => {
+  const { loading } = useContext(AuthContext);
   const [bills, setBills] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("All");
 
@@ -33,12 +35,21 @@ const BillsPage = () => {
     fetchBills(category);
   };
 
-  return (
-    <Slide direction="up" duration={800} triggerOnce className="max-w-6xl mx-auto px-4 py-10">
+  return loading ? (
+    <div className="container mx-auto flex justify-center items-center">
+      <span className="loading loading-spinner text-info"></span>
+    </div>
+  ) : (
+    <Slide
+      direction="up"
+      duration={800}
+      triggerOnce
+      className="max-w-6xl mx-auto px-4 py-10"
+    >
       <div>
         <title>SmartUtility-Bills</title>
         <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
-         All <span className="text-[#023e8a]">Bill</span>
+          All <span className="text-[#023e8a]">Bill</span>
         </h2>
 
         {/* Filter Dropdown */}
