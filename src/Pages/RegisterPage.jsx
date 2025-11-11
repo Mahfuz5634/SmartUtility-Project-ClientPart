@@ -96,7 +96,7 @@ const RegisterPage = () => {
 
   return (
     <div className="container mx-auto flex flex-col justify-center items-center min-h-screen">
-         <title>Kidz-Corner-Register</title>
+         <title>SmartUtility-Register</title>
       <div className="hero w-full max-w-4xl">
         <div className="card w-full max-w-sm bg-white shadow-2xl rounded-2xl">
           <div className="card-body">

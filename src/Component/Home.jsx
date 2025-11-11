@@ -10,6 +10,7 @@ import AboutSmartUtility from "../Pages/Extrasec2";
 
 
 const Home = () => {
+  <title>SmartUtility-Home</title>
   return (
     <div className=" w-full ">
      <div className="container mx-auto">

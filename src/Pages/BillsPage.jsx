@@ -34,7 +34,9 @@ const BillsPage = () => {
   };
 
   return (
+
     <div className="max-w-6xl mx-auto px-4 py-10">
+      <title>SmartUtility-Bills</title>
       <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
         All Bills
       </h2>

@@ -5,7 +5,7 @@ import { AuthContext } from "../Context Api/AuthContext";
 import { toast } from "react-toastify";
 
 const Navbar = () => {
-  const { LogOutFunc, user } = useContext(AuthContext);
+  const { LogOutFunc, user,loading } = useContext(AuthContext);
   console.log(user);
 
   const handleLogout = () => {
@@ -101,7 +101,8 @@ const Navbar = () => {
 
       {/* Navbar End */}
       <div className="navbar-end">
-        {user ? (
+        {
+          loading?<span className="loading loading-spinner text-info"></span>:user ? (
           <div className="flex items-center gap-3">
             {/* Profile Image */}
             <div className="tooltip tooltip-bottom" data-tip={user.displayName || "User"}>
@@ -137,7 +138,8 @@ const Navbar = () => {
               Register
             </Link>
           </>
-        )}
+        )
+        }
       </div>
     </div>
   );

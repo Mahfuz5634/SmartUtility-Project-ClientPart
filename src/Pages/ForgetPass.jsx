@@ -26,7 +26,7 @@ const ForgetPass = () => {
 
   return (
     <div className="min-h-screen container mx-auto flex justify-center items-center ">
-        <title>Kidz-Corner-ForgetPass</title>
+        <title>SmartUtility-ForgetPass</title>
       <div className="bg-white shadow-2xl rounded-2xl p-8 w-[90%] max-w-md text-center transition-all duration-300 hover:shadow-[#239EAB]/40">
         <h1 className="text-3xl font-bold text-black  mb-3">
           Forgot Password?
