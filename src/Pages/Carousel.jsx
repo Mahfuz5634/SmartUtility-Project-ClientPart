@@ -12,13 +12,13 @@ const CarouselPart = () => {
       <div className="max-w-7xl mx-auto px-6 flex flex-col lg:flex-row items-center gap-10">
         {/* Left Side: Text Section */}
         <div className="flex-1 text-center lg:text-left">
-          <h1 className="text-4xl lg:text-5xl font-bold text-gray-800">
+          <h1 className="text-4xl lg:text-5xl font-bold text-gray-800 dark:text-white">
             <Slide direction="up" duration={800} triggerOnce>
               SmartUtility — Manage Your Bills Smarter ⚡
             </Slide>
           </h1>
            <Slide direction="up" duration={800} triggerOnce>
-              <p className="mt-4 text-gray-600 text-lg leading-relaxed">
+              <p className="mt-4 text-gray-600 text-lg leading-relaxed dark:text-white">
             Easily monitor and pay your{" "}
             <span className="font-semibold text-[#023e8a]">
               electricity, water, and gas
@@ -52,7 +52,7 @@ const CarouselPart = () => {
               <img
                 src={img1}
                 alt="Utility illustration"
-                className="rounded-xl h-[300px] sm:h-[340px] md:h-[380px] lg:h-[400px] w-full object-contain p-4"
+                className="rounded-md h-[300px] sm:h-[340px] md:h-[380px] lg:h-[400px] w-full object-contain p-4"
               />
               <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 bg-black/60 text-white px-4 py-2 rounded-lg text-center shadow-lg backdrop-blur-sm">
                 <p className="text-lg font-semibold">Use Power Wisely</p>

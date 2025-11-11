@@ -35,7 +35,7 @@ const Navbar = () => {
       <NavLink
         to="/"
         className={({ isActive }) =>
-          `lg:mr-4 font-serif font-bold ${
+          `lg:mr-4 font-serif font-bold dark:text-white${
             isActive ? "text-[#0077b6] underline" : "text-[#101828]"
           }`
         }
@@ -46,7 +46,7 @@ const Navbar = () => {
       <NavLink
         to="/allbills"
         className={({ isActive }) =>
-          `lg:mr-4 font-serif font-bold ${
+          `lg:mr-4 font-serif font-bold dark:text-white ${
             isActive ? "text-[#0077b6] underline" : "text-[#101828]"
           }`
         }
@@ -59,7 +59,7 @@ const Navbar = () => {
         <NavLink
           to="/mypaybills"
           className={({ isActive }) =>
-            `lg:mr-4 font-serif font-bold ${
+            `lg:mr-4 font-serif font-bold dark:text-white ${
               isActive ? "text-[#0077b6] underline" : "text-[#101828]"
             }`
           }
@@ -72,7 +72,7 @@ const Navbar = () => {
       <NavLink
         to="/faq"
         className={({ isActive }) =>
-          `lg:mr-4 font-serif font-bold ${
+          `lg:mr-4 font-serif font-bold dark:text-white ${
             isActive ? "text-[#0077b6] underline" : "text-[#101828]"
           }`
         }

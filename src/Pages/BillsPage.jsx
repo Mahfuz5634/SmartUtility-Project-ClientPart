@@ -48,8 +48,8 @@ const BillsPage = () => {
     >
       <div>
         <title>SmartUtility-Bills</title>
-        <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
-          All <span className="text-[#023e8a]">Bill</span>
+        <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center dark:text-white">
+          All <span className="text-[#023e8a] ">Bill</span>
         </h2>
 
         {/* Filter Dropdown */}

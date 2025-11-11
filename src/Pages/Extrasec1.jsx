@@ -3,8 +3,8 @@ import { FaLightbulb, FaFire, FaTint, FaWifi } from "react-icons/fa";
 
 const EnergySavingTips = () => {
   return (
-    <section className="bg-blue-50 py-14 px-6 rounded-xl">
-      <h2 className="text-3xl font-bold text-center text-[#101828] mb-10">
+    <section className="bg-blue-50 py-14 px-6 rounded-xl dark:bg-[#1d232a] ">
+      <h2 className="text-3xl font-bold text-center text-[#101828] mb-10 dark:text-white  ">
         Energy Saving Tips
       </h2>
 
