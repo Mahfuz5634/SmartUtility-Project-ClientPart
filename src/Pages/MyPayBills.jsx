@@ -148,13 +148,13 @@ const MyPayBills = () => {
               <div className="flex gap-2 mt-2">
                 <button
                   onClick={() => toast.info('Update coming soon')}
-                  className="flex-1 flex items-center justify-center gap-1 bg-[#0096d6] text-white hover:bg-[#0077b6] px-2 py-2 rounded"
+                  className="flex-1 flex items-center justify-center gap-1 bg-[#0096d6] text-white hover:bg-[#0077b6 px-3  py-2 rounded"
                 >
                   <FaEdit /> Update
                 </button>
                 <button
                   onClick={() => toast.info('Delete feature coming soon')}
-                  className="flex-1 flex items-center justify-center gap-1 bg-red-500 text-white hover:bg-red-600 px-3 py-2 rounded"
+                  className="flex-1 flex items-center justify-center gap-1 bg-red-500 text-white hover:bg-red-600 px-3  py-2 rounded"
                 >
                   <FaTrash /> Delete
                 </button>

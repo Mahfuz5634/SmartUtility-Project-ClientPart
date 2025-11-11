@@ -3,6 +3,7 @@ import { FcBrokenLink } from "react-icons/fc";
 import { Link, NavLink } from "react-router";
 import { AuthContext } from "../Context Api/AuthContext";
 import { toast } from "react-toastify";
+import { Fade } from "react-awesome-reveal";
 
 const Navbar = () => {
   const { LogOutFunc, user,loading } = useContext(AuthContext);

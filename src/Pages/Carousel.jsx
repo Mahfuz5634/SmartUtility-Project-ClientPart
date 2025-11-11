@@ -4,6 +4,7 @@ import { Carousel } from "react-responsive-carousel";
 import img1 from "../assets/household-services-utility-bills-regular-payments-as-gas-water-electricity-heating-saving-resources-concept-modern-flat-cartoon-style-illustration-on-white-background-vector.jpg";
 import img2 from "../assets/istockphoto-1311503439-612x612.jpg";
 import img3 from "../assets/utility-bills-household-services-online-regular-payments-as-gas-water-electricity-heating-saving-resources-concept-modern-flat-cartoon-style-illustration-on-white-background-vector.jpg";
+import { Slide} from "react-awesome-reveal";
 
 const CarouselPart = () => {
   return (
@@ -12,15 +13,19 @@ const CarouselPart = () => {
         {/* Left Side: Text Section */}
         <div className="flex-1 text-center lg:text-left">
           <h1 className="text-4xl lg:text-5xl font-bold text-gray-800">
-            SmartUtility — Manage Your Bills Smarter ⚡
+            <Slide direction="up" duration={800} triggerOnce>
+              SmartUtility — Manage Your Bills Smarter ⚡
+            </Slide>
           </h1>
-          <p className="mt-4 text-gray-600 text-lg leading-relaxed">
+           <Slide direction="up" duration={800} triggerOnce>
+              <p className="mt-4 text-gray-600 text-lg leading-relaxed">
             Easily monitor and pay your{" "}
             <span className="font-semibold text-[#023e8a]">
               electricity, water, and gas
             </span>{" "}
             bills in one place. Simple. Secure. Smart.
           </p>
+            </Slide>
 
           {/* Buttons */}
           <div className="mt-6 flex justify-center lg:justify-start gap-4">
@@ -73,7 +78,6 @@ const CarouselPart = () => {
                 <p className="text-lg font-semibold">Switch Off. Save Power.</p>
               </div>
             </div>
-        
           </Carousel>
         </div>
       </div>
