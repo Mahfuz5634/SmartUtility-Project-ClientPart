@@ -13,9 +13,6 @@ import {
 import { Slide } from "react-awesome-reveal";
 import Swal from "sweetalert2";
 
-
-
-
 const MyPayBills = () => {
   const { user } = useContext(AuthContext);
   const [data, setData] = useState([]);
@@ -26,7 +23,9 @@ const MyPayBills = () => {
   useEffect(() => {
     if (!user?.email) return;
     setLoading(true);
-    fetch(`http://localhost:3000/payments?email=${user.email}`)
+    fetch(
+      `https://smart-utility-server.vercel.app/payments?email=${user.email}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setData(data);
@@ -87,7 +86,7 @@ const MyPayBills = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/bills/${id}`, {
+        fetch(`https://smart-utility-server.vercel.app/bills/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
@@ -116,7 +115,7 @@ const MyPayBills = () => {
 
     console.log(updatedBill);
 
-    fetch(`http://localhost:3000/bills/${selectedBill._id}`, {
+    fetch(`https://smart-utility-server.vercel.app/bills/${selectedBill._id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updatedBill),
@@ -141,7 +140,7 @@ const MyPayBills = () => {
       <div>
         <title>SmartUtility-MyBill</title>
         <h1 className="text-2xl sm:text-3xl font-bold text-center mb-6">
-         My Paid <span className="text-[#023e8a]">Bills</span>
+          My Paid <span className="text-[#023e8a]">Bills</span>
         </h1>
 
         {/* Cards */}
@@ -184,7 +183,7 @@ const MyPayBills = () => {
                     "Username",
                     "Email",
                     "Amount",
-                     "Category",
+                    "Category",
                     "Address",
                     "Phone",
                     "Date",

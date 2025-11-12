@@ -11,7 +11,7 @@ const BillsPage = () => {
   const categories = ["All", "Electricity", "Gas", "Water", "Internet"];
 
   const fetchBills = async (category = "All") => {
-    let url = "http://localhost:3000/allbilltwo";
+    let url = "https://smart-utility-server.vercel.app/allbilltwo";
     if (category !== "All") {
       url += `?category=${category}`;
     }

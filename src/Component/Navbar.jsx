@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 
 const Navbar = () => {
   const { LogOutFunc, user, loading } = useContext(AuthContext);
-  console.log(user);
+  //console.log(user);
 
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
 
@@ -35,7 +35,7 @@ const Navbar = () => {
       <NavLink
         to="/"
         className={({ isActive }) =>
-          `lg:mr-4 font-serif font-bold dark:text-white${
+          `lg:mr-4 font-serif font-bold dark:text-white ${
             isActive ? "text-[#0077b6] underline" : "text-[#101828]"
           }`
         }

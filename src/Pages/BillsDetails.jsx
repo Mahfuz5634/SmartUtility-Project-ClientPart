@@ -12,7 +12,7 @@ const BillsDetails = () => {
   useEffect(() => {
     if (!id) return;
 
-    fetch(`http://localhost:3000/specificBill/${id}`)
+    fetch(`https://smart-utility-server.vercel.app/specificBill/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setData(data);
@@ -39,31 +39,34 @@ const BillsDetails = () => {
     billDate.getMonth() === now.getMonth() &&
     billDate.getFullYear() === now.getFullYear();
 
-    const handlepaybill=async (e)=>{
-      e.preventDefault();
-      const form=e.target;
+  const handlepaybill = async (e) => {
+    e.preventDefault();
+    const form = e.target;
 
-      const payData = {
+    const payData = {
       email: user?.email || "user@example.com",
       billId: data?._id || id,
       amount: data?.amount,
-      category:data?.category,
+      category: data?.category,
       username: form.username.value.trim(),
       address: form.address.value.trim(),
       phone: form.phone.value.trim(),
       date: new Date().toLocaleDateString(),
     };
 
-     if (!payData.username || !payData.address || !payData.phone) {
+    if (!payData.username || !payData.address || !payData.phone) {
       toast.warning("⚠️ Please fill in all required fields!");
       return;
     }
     try {
-      const res = await fetch("http://localhost:3000/paybill", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payData),
-      });
+      const res = await fetch(
+        "https://smart-utility-server.vercel.app/paybill",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payData),
+        }
+      );
 
       const result = await res.json();
 
@@ -79,8 +82,6 @@ const BillsDetails = () => {
       toast.error("Server error while saving payment.");
     }
   };
-    
-
 
   return (
     <div className="max-w-3xl mx-auto my-8 p-4 bg-white rounded-lg shadow-md text-gray-800 font-sans">
@@ -148,9 +149,7 @@ const BillsDetails = () => {
             Pay Bill Form
           </h3>
 
-          <form
-           onSubmit={handlepaybill}
-          >
+          <form onSubmit={handlepaybill}>
             {/* Email */}
             <div>
               <label className="block text-sm font-medium text-gray-700">
