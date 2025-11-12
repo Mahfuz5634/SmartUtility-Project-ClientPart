@@ -6,7 +6,7 @@ The system supports authentication, real-time CRUD operations, PDF bill report d
 ---
 
 ## 🌐 Live Site URL
-🔗 [Visit Utility Bill Management System](https://your-live-site-url.netlify.app](https://smart-utility-bd.netlify.app/)
+🔗 [Visit Utility Bill Management System](https://smart-utility-bd.netlify.app/)
 
 ---
 
