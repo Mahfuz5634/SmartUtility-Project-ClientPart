@@ -36,7 +36,7 @@ The system supports authentication, real-time CRUD operations, PDF bill report d
 ### ⚙️ Backend (Server)
 - Node.js  
 - Express.js  
-- MongoDB (Mongoose)  
+- MongoDB-Atlas
 - CORS & Dotenv  
 
 ---
