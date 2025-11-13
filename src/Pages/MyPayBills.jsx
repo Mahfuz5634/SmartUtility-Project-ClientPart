@@ -145,14 +145,14 @@ const MyPayBills = () => {
 
         {/* Cards */}
         <div className="flex flex-col md:flex-row gap-4 mb-6">
-          <div className="flex-1 flex items-center gap-4 bg-white rounded-lg shadow-lg p-5 min-w-[180px]">
+          <div className="flex-1 flex items-center gap-4 bg-white rounded-lg shadow-lg p-5 min-w-[180px] dark:bg-black">
             <FaUser className="text-blue-500 text-4xl sm:text-5xl" />
             <div className="flex flex-col justify-center">
               <p className="text-sm sm:text-base text-gray-500">Bills</p>
               <p className="text-xl sm:text-2xl font-semibold">{totalBills}</p>
             </div>
           </div>
-          <div className="flex-1 flex items-center gap-4 bg-white rounded-lg shadow-lg p-5 min-w-[180px]">
+          <div className="flex-1 flex items-center gap-4 bg-white rounded-lg shadow-lg p-5 min-w-[180px] dark:bg-black">
             <FaMoneyBill className="text-green-700 text-4xl sm:text-5xl" />
             <div className="flex flex-col justify-center">
               <p className="text-sm sm:text-base text-gray-500">Total Paid</p>
@@ -170,14 +170,14 @@ const MyPayBills = () => {
         </div>
 
         {/* Table */}
-        <div className="hidden md:block overflow-x-auto rounded-lg shadow-lg bg-white">
+        <div className="hidden md:block overflow-x-auto rounded-lg shadow-lg bg-white ">
           {data.length === 0 ? (
             <p className="text-center p-10 text-gray-500 text-sm dark:text-white">
               No payments found.
             </p>
           ) : (
             <table className="w-full min-w-max table-auto text-sm border-collapse">
-              <thead className="bg-blue-100 sticky top-0 z-10">
+              <thead className="bg-blue-100 sticky top-0 z-10 dark:bg-black dark:hover:bg-black">
                 <tr>
                   {[
                     "Username",
@@ -197,7 +197,7 @@ const MyPayBills = () => {
               </thead>
               <tbody>
                 {data.map((bill) => (
-                  <tr key={bill._id} className="hover:bg-blue-50 transition">
+                  <tr key={bill._id} className="hover:bg-blue-50 transition dark:bg-black dark:hover:bg-black">
                     <td className="border-t px-4 py-3">{bill.username}</td>
                     <td className="border-t px-4 py-3">{bill.email}</td>
                     <td className="border-t px-4 py-3 text-green-700 font-semibold">
@@ -210,7 +210,7 @@ const MyPayBills = () => {
                     <td className="border-t px-4 py-3 flex flex-col sm:flex-row sm:items-center gap-2">
                       <button
                         onClick={() => handleUpdateClick(bill)}
-                        className="flex items-center gap-1 bg-[#0096d6] text-white hover:bg-[#0077b6] px-3 py-1 rounded"
+                        className="flex items-center gap-1 bg-[#0096d6] text-white  hover:bg-[#0077b6] dark:hover:bg-black px-3 py-1 rounded"
                       >
                         <FaEdit /> Update
                       </button>

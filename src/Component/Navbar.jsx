@@ -116,7 +116,7 @@ const Navbar = () => {
         {/* Logo */}
         <div className="flex items-center gap-1">
           <FcBrokenLink className="text-2xl hidden lg:block" />
-          <Link to="/" className="lg:text-2xl font-bold">
+          <Link to="/" className="lg:text-2xl  font-bold">
             Smart<span className="text-[#023e8a]">Utility</span>
           </Link>
         </div>
