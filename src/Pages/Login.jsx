@@ -4,19 +4,21 @@ import { NavLink, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../Context Api/AuthContext";
 import { toast } from "react-toastify";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-const provider = new GoogleAuthProvider();
 
 const Login = () => {
   const { LogInFunc, auth, setemail } = useContext(AuthContext);
-  const navigate =useNavigate();
- const location= useLocation();
+  const navigate = useNavigate();
+  const location = useLocation();
   const [see, setsee] = useState(false);
+  const provider = new GoogleAuthProvider();
+
+  const from = location.state?.from || "/";
 
   const googlelogin = () => {
     signInWithPopup(auth, provider)
       .then(() => {
         toast.success("Successfully Logged In");
-        navigate(`${location.state ? location.state : "/"}`);
+        navigate(from, { replace: true });
       })
       .catch((error) => {
         toast.error(error.message);
@@ -31,7 +33,7 @@ const Login = () => {
       .then(() => {
         toast.success("Successfully Logged In");
         e.target.reset();
-        navigate(`${location.state ? location.state : "/"}`);
+         navigate(from, { replace: true }); 
       })
       .catch((error) => {
         switch (error.code) {

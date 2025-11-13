@@ -1,12 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import { FcBrokenLink } from "react-icons/fc";
-import { Link, NavLink } from "react-router";
+import { Link, NavLink, useLocation } from "react-router";
 import { AuthContext } from "../Context Api/AuthContext";
 import { toast } from "react-toastify";
 
 const Navbar = () => {
   const { LogOutFunc, user, loading } = useContext(AuthContext);
   //console.log(user);
+    const location = useLocation();
 
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
 
@@ -186,6 +187,7 @@ const Navbar = () => {
           <>
             <Link
               to="/login"
+              state={{ from: location.pathname }}
               className="btn mr-2 bg-[#0077b6] text-white font-bold font-serif hover:scale-105"
             >
               Login
