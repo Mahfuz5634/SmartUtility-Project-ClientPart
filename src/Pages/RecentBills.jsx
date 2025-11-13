@@ -42,7 +42,7 @@ const BillsCardSection = () => {
 
             <Link
               to={`/billdetails/${bill._id}`}
-              className="bg-[#0077b6] hover:bg-[#0076b6bf] text-white text-sm font-semibold py-2 px-4 rounded-lg"
+              className="bg-gradient-to-r from-[#0077b6] to-[#00b4d8] hover:opacity-90  text-white text-sm font-semibold py-2 px-4 rounded-lg"
             >
               See Details
             </Link>

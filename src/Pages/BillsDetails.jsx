@@ -26,11 +26,16 @@ const BillsDetails = () => {
 
   if (loading)
     return (
-      <h2 className="text-center mt-16 text-gray-500 text-lg">Loading...</h2>
+      <div className="container mx-auto flex justify-center items-center h-64">
+        <span className="loading loading-spinner text-info"></span>
+      </div>
     );
+
   if (!data)
     return (
-      <h2 className="text-center mt-16 text-red-500 text-lg">Bill not found</h2>
+      <h2 className="text-center mt-16 text-red-500 text-lg">
+        Bill not found
+      </h2>
     );
 
   const billDate = new Date(data.date);
@@ -71,138 +76,146 @@ const BillsDetails = () => {
       const result = await res.json();
 
       if (result.insertedId) {
-        toast.success("Payment SuccessFull!");
+        toast.success("Payment Successful!");
         form.reset();
         document.getElementById("my_modal_5").close();
       } else {
-        toast.error("Failed to payment. Try again.");
+        toast.error("Failed to process payment. Try again.");
       }
     } catch (error) {
       console.error(error);
-      toast.error("Server error while saving payment.");
+      toast.error("⚠️ Server error while saving payment.");
     }
   };
 
   return (
-    <div className="max-w-3xl mx-auto my-8 p-4 bg-white rounded-lg shadow-md text-gray-800 font-sans">
+    <div className="max-w-4xl mx-auto my-10 px-4 py-6 bg-gradient-to-br from-[#eff6ff] via-[#f8fafc] to-[#e3f2fd] rounded-2xl shadow-lg border border-gray-100 transition-all duration-300 hover:shadow-xl">
       <title>SmartUtility - BillsDetails</title>
-      <h1 className="text-xl md:text-2xl font-bold text-center mb-4">
+
+      {/* Header */}
+      <h1 className="text-3xl md:text-4xl font-extrabold text-center mb-6 text-[#023e8a] tracking-wide">
         {data.title}
       </h1>
 
-      <div className="flex flex-col md:flex-row gap-4">
+      <div className="flex flex-col md:flex-row gap-6 items-center">
         {/* Left: Image */}
-        <div className="md:w-1/2">
+        <div className="md:w-1/2 rounded-xl overflow-hidden shadow-md group">
           <img
             src={data.image}
             alt={data.title}
-            className="w-full h-48 md:h-56 object-contain rounded-md shadow-sm transition-transform duration-300 hover:scale-105"
+            className="w-full h-52 md:h-64 object-contain rounded-xl transform transition-transform duration-300 group-hover:scale-105"
           />
         </div>
 
-        {/* Right: Text */}
-        <div className="md:w-1/2 flex flex-col justify-between">
-          <div className="space-y-2 text-gray-700 text-sm md:text-base">
-            <p>
-              <span className="font-semibold">Category:</span> {data.category}
-            </p>
-            <p>
-              <span className="font-semibold">Location:</span> {data.location}
-            </p>
-            <p>
-              <span className="font-semibold">Amount:</span>{" "}
-              <span className="text-[#00b4d8] font-semibold">
-                {data.amount} BDT
-              </span>
-            </p>
-            <p>
-              <span className="font-semibold">Date:</span> {data.date}
-            </p>
-            <p className="text-justify">
-              <span className="font-semibold">Description:</span>{" "}
-              {data.description}
-            </p>
-          </div>
+        {/* Right: Details */}
+        <div className="md:w-1/2 space-y-3 text-gray-700">
+          <p>
+            <span className="font-semibold text-[#023e8a]">Category:</span>{" "}
+            {data.category}
+          </p>
+          <p>
+            <span className="font-semibold text-[#023e8a]">Location:</span>{" "}
+            {data.location}
+          </p>
+          <p>
+            <span className="font-semibold text-[#023e8a]">Amount:</span>{" "}
+            <span className="text-[#0077b6] font-semibold">
+              {data.amount} BDT
+            </span>
+          </p>
+          <p>
+            <span className="font-semibold text-[#023e8a]">Date:</span>{" "}
+            {data.date}
+          </p>
+          <p className="text-justify leading-relaxed">
+            <span className="font-semibold text-[#023e8a]">Description:</span>{" "}
+            {data.description}
+          </p>
 
           {/* Pay Bill Button */}
           <button
-            className={`w-full mt-4 py-2 rounded-md text-white font-semibold text-sm transition-colors duration-300
+            className={`w-full mt-6 py-3 rounded-lg text-white font-semibold text-base transition-all duration-300 shadow-md 
               ${
                 isCurrentMonth
-                  ? "bg-[#0077b6] hover:bg-[#0076b6c0] cursor-pointer"
+                  ? "bg-gradient-to-r from-[#0077b6] to-[#00b4d8] hover:opacity-90"
                   : "bg-gray-400 cursor-not-allowed"
               }`}
             disabled={!isCurrentMonth}
             onClick={() => document.getElementById("my_modal_5").showModal()}
           >
             {isCurrentMonth
-              ? "Pay Bill"
-              : "Pay Bill (Only current month bills can be paid)"}
+              ? "💳 Pay Bill"
+              : "⚠️ Only current month bills can be paid"}
           </button>
         </div>
       </div>
 
-      {/* ✅ Modal added here */}
-      <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
-        <div className="modal-box">
-          <h3 className="font-bold text-lg mb-4 text-center text-[#0077b6]">
-            Pay Bill Form
+      {/* Modal */}
+      <dialog
+        id="my_modal_5"
+        className="modal modal-bottom sm:modal-middle transition-all duration-300"
+      >
+        <div className="modal-box bg-white rounded-2xl shadow-lg p-6">
+          <h3 className="font-bold text-xl mb-5 text-center text-[#0077b6]">
+            💰 Pay Bill Form
           </h3>
 
-          <form onSubmit={handlepaybill}>
+          <form onSubmit={handlepaybill} className="space-y-3">
             {/* Email */}
             <div>
-              <label className="block text-sm font-medium text-gray-700">
+              <label className="block text-sm font-semibold text-gray-700">
                 Email
               </label>
               <input
                 type="email"
                 value={user?.email || "user@example.com"}
                 readOnly
-                className="input input-bordered w-full mt-1 bg-gray-100 cursor-not-allowed"
+                className="input input-bordered w-full mt-1 bg-gray-100"
               />
             </div>
 
             {/* Bill ID */}
             <div>
-              <label className="block text-sm font-medium text-gray-700">
+              <label className="block text-sm font-semibold text-gray-700">
                 Bill ID
               </label>
               <input
                 type="text"
                 value={data?._id || id}
                 readOnly
-                className="input input-bordered w-full mt-1 bg-gray-100 cursor-not-allowed"
+                className="input input-bordered w-full mt-1 bg-gray-100"
               />
             </div>
 
             {/* Amount */}
             <div>
-              <label className="block text-sm font-medium text-gray-700">
+              <label className="block text-sm font-semibold text-gray-700">
                 Amount (BDT)
               </label>
               <input
                 type="text"
                 value={data?.amount || ""}
                 readOnly
-                className="input input-bordered w-full mt-1 bg-gray-100 cursor-not-allowed"
+                className="input input-bordered w-full mt-1 bg-gray-100"
               />
             </div>
+
+            {/* Category */}
             <div>
-              <label className="block text-sm font-medium text-gray-700">
+              <label className="block text-sm font-semibold text-gray-700">
                 Category
               </label>
               <input
                 type="text"
                 value={data?.category || ""}
                 readOnly
-                className="input input-bordered w-full mt-1 bg-gray-100 cursor-not-allowed"
+                className="input input-bordered w-full mt-1 bg-gray-100"
               />
             </div>
 
             {/* Username */}
             <div>
-              <label className="block text-sm font-medium text-gray-700">
+              <label className="block text-sm font-semibold text-gray-700">
                 Username
               </label>
               <input
@@ -216,7 +229,7 @@ const BillsDetails = () => {
 
             {/* Address */}
             <div>
-              <label className="block text-sm font-medium text-gray-700">
+              <label className="block text-sm font-semibold text-gray-700">
                 Address
               </label>
               <input
@@ -230,7 +243,7 @@ const BillsDetails = () => {
 
             {/* Phone */}
             <div>
-              <label className="block text-sm font-medium text-gray-700">
+              <label className="block text-sm font-semibold text-gray-700">
                 Phone
               </label>
               <input
@@ -244,29 +257,29 @@ const BillsDetails = () => {
 
             {/* Date */}
             <div>
-              <label className="block text-sm font-medium text-gray-700">
+              <label className="block text-sm font-semibold text-gray-700">
                 Date
               </label>
               <input
                 type="text"
                 value={new Date().toLocaleDateString()}
                 readOnly
-                className="input input-bordered w-full mt-1 bg-gray-100 cursor-not-allowed"
+                className="input input-bordered w-full mt-1 bg-gray-100"
               />
             </div>
 
             {/* Actions */}
-            <div className="modal-action flex justify-end">
+            <div className="modal-action flex justify-end gap-3 mt-4">
               <button
                 type="button"
-                className="btn btn-outline"
+                className="btn btn-outline btn-sm md:btn-md"
                 onClick={() => document.getElementById("my_modal_5").close()}
               >
                 Cancel
               </button>
               <button
                 type="submit"
-                className="btn bg-[#0077b6] text-white hover:bg-[#0076b6c0]"
+                className="btn btn-sm md:btn-md bg-gradient-to-r from-[#0077b6] to-[#00b4d8] text-white border-none hover:opacity-90"
               >
                 Confirm Payment
               </button>

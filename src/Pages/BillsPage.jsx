@@ -48,8 +48,8 @@ const BillsPage = () => {
     >
       <div>
         <title>SmartUtility-Bills</title>
-        <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center dark:text-white">
-          All <span className="text-[#023e8a] ">Bill</span>
+        <h2 className="text-3xl font-extrabold mb-8 text-center bg-gradient-to-r from-[#023e8a] via-[#0077b6] to-[#00b4d8] bg-clip-text text-transparent tracking-wide">
+          All <span className="text-[#03045e] dark:text-[#caf0f8]">Bills</span>
         </h2>
 
         {/* Filter Dropdown */}
@@ -95,7 +95,7 @@ const BillsPage = () => {
                 </p>
 
                 <Link to={`/billdetails/${bill._id}`}>
-                  <button className="w-full bg-[#0077b6] text-white py-2 rounded-lg font-medium hover:bg-[#0076b6ce] transition">
+                  <button className="w-full bg-gradient-to-r from-[#0077b6] to-[#00b4d8] hover:opacity-90 text-white py-2 rounded-lg font-medium hover:bg-[#0076b6ce] transition">
                     See Details
                   </button>
                 </Link>

@@ -29,7 +29,7 @@ const CarouselPart = () => {
 
           {/* Buttons */}
           <div className="mt-6 flex justify-center lg:justify-start gap-4">
-            <button className="bg-blue-600 text-white px-6 py-2 rounded-lg shadow hover:bg-blue-700 transition">
+            <button className="bg-gradient-to-r from-[#0077b6] to-[#00b4d8] hover:opacity-90 text-white px-6 py-2 rounded-lg shadow  transition">
               Get Started
             </button>
             <button className="border border-blue-600 text-blue-600 px-6 py-2 rounded-lg hover:bg-blue-50 transition">

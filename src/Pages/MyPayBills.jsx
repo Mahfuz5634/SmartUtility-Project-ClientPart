@@ -172,7 +172,7 @@ const MyPayBills = () => {
         {/* Table */}
         <div className="hidden md:block overflow-x-auto rounded-lg shadow-lg bg-white">
           {data.length === 0 ? (
-            <p className="text-center p-10 text-gray-500 text-sm">
+            <p className="text-center p-10 text-gray-500 text-sm dark:text-white">
               No payments found.
             </p>
           ) : (
