@@ -1,7 +1,5 @@
 # SmartUtility (Client Side)
 
-![SmartUtility Screenshot](./screenshot.png)  
-*A preview of the SmartUtility client interface*
 
 ---
 
@@ -13,18 +11,16 @@ This project is part of a larger SmartUtility ecosystem, where the client commun
 ---
 
 ## 🚀 Live Demo & Links  
-- **Live Demo:** *(ডেপলয় করা থাকলে এখানে দিন)*  
+- **Live Demo:** https://smart-utility-bd.netlify.app/
 - **GitHub Repository (Client):** https://github.com/Mahfuz5634/SmartUtility-Project-ClientPart  
-- **Backend Repository:** *(যদি থাকে, ব্যাকএন্ডের লিংক এখানে দিন)*  
 
 ---
 
 ## 🛠️ Technologies Used  
 - **Frontend:** React  
-- **State Management / API Calls:** Axios (বা যেটা ব্যবহার করেছেন)  
-- **Styling:** Tailwind CSS (বা CSS / অন্য যেকোনো)  
-- **Build / Tooling:** (যদি Webpack, Vite বা Create React App ব্যবহার করা হয়ে থাকে, সেটা উল্লেখ করুন)  
-- **Other Libraries:** (যেমন React Router, Formik ইত্যাদি — যদি থাকে)  
+- **State Management / API Calls:** Axios,fetch
+- **Styling:** Tailwind CSS 
+- **Build / Tooling:** vite
 
 ---
 
@@ -32,22 +28,20 @@ This project is part of a larger SmartUtility ecosystem, where the client commun
 - Responsive dashboard/UI for utilities  
 - Real-time data fetching from backend  
 - User-friendly forms for configuration  
-- Dynamic charts or tables (যদি থাকে)  
+- Dynamic charts or tables   
 - Error handling & notifications  
-- Authentication (যদি থাকে)  
-- Settings panel / Preferences (যদি থাকে)  
+- Authentication 
+
 
 ---
 
 ## 📦 Dependencies  
- নিচে কিছু সম্ভাব্য ডিপেন্ডেন্সি দেওয়া হলো (নিজে যে লাইব্রেরি ব্যবহার করেছেন, সেগুলো এখানে রাখুন):  
 - `react`  
 - `react-dom`  
-- `axios`  
 - `tailwindcss`  
 - `react-router-dom`  
-- `@tailwindcss/forms` (যদি থাকে)  
-- অন্য যেকোনো UI বা utility লাইব্রেরি  
+- `@tailwindcss/forms`
+ 
 
 ---
 
