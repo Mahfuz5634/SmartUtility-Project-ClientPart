@@ -1,15 +1,22 @@
 import React, { useContext, useEffect, useState } from "react";
 import { FcBrokenLink } from "react-icons/fc";
+import { HiMenu, HiX } from "react-icons/hi";
+import {
+  HiHome,
+  HiDocumentText,
+  HiQuestionMarkCircle,
+  HiCurrencyDollar,
+} from "react-icons/hi";
 import { Link, NavLink, useLocation } from "react-router";
 import { AuthContext } from "../Context Api/AuthContext";
 import { toast } from "react-toastify";
 
 const Navbar = () => {
   const { LogOutFunc, user, loading } = useContext(AuthContext);
-  //console.log(user);
-    const location = useLocation();
+  const location = useLocation();
 
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     const html = document.querySelector("html");
@@ -31,106 +38,72 @@ const Navbar = () => {
       });
   };
 
-  const link = (
+  const linkClasses = ({ isActive }) =>
+    `flex items-center gap-2 px-3 py-2 rounded-lg transition-colors font-serif font-semibold ${
+      isActive
+        ? "text-[#0077b6] bg-[#e0f2fe]"
+        : "text-[#101828] dark:text-white hover:text-[#0077b6]"
+    }`;
+
+  const links = (
     <>
-      <NavLink
-        to="/"
-        className={({ isActive }) =>
-          `lg:mr-4 font-serif font-bold dark:text-white ${
-            isActive ? "text-[#0077b6] underline" : "text-[#101828]"
-          }`
-        }
-      >
-        Home
+      <NavLink to="/" className={linkClasses}>
+        <HiHome className="text-lg" />
+        <span>Home</span>
       </NavLink>
 
-      <NavLink
-        to="/allbills"
-        className={({ isActive }) =>
-          `lg:mr-4 font-serif font-bold dark:text-white ${
-            isActive ? "text-[#0077b6] underline" : "text-[#101828]"
-          }`
-        }
-      >
-        Bills
+      <NavLink to="/allbills" className={linkClasses}>
+        <HiDocumentText className="text-lg" />
+        <span>Bills</span>
       </NavLink>
+
       {loading ? (
-        <span className="loading loading-spinner w-[15px] text-info "></span>
-      ) : user ? (
-        <NavLink
-          to="/mypaybills"
-          className={({ isActive }) =>
-            `lg:mr-4 font-serif font-bold dark:text-white ${
-              isActive ? "text-[#0077b6] underline" : "text-[#101828]"
-            }`
-          }
-        >
-          My Pay Bills
-        </NavLink>
+        <span className="loading loading-spinner w-[15px] text-info"></span>
       ) : (
-        " "
+        user && (
+          <NavLink to="/mypaybills" className={linkClasses}>
+            <HiCurrencyDollar className="text-lg" />
+            <span>My Pay Bills</span>
+          </NavLink>
+        )
       )}
-      <NavLink
-        to="/faq"
-        className={({ isActive }) =>
-          `lg:mr-4 font-serif font-bold dark:text-white ${
-            isActive ? "text-[#0077b6] underline" : "text-[#101828]"
-          }`
-        }
-      >
-        FAQ
+
+      <NavLink to="/faq" className={linkClasses}>
+        <HiQuestionMarkCircle className="text-lg" />
+        <span>FAQ</span>
       </NavLink>
     </>
   );
 
   return (
-    <div className="navbar bg-base-100">
-      {/* Navbar Start */}
+    <div className="navbar bg-base-100 border-b border-base-200 sticky top-0 z-50">
+     
       <div className="navbar-start">
-        {/* Mobile Dropdown */}
-        <div className="dropdown">
-          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h8m-8 6h16"
-              />
-            </svg>
-          </div>
-          <ul
-            tabIndex="-1"
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
-          >
-            {link}
-          </ul>
-        </div>
+        <button
+          className="btn btn-ghost lg:hidden"
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          {isOpen ? (
+            <HiX className="w-6 h-6" />
+          ) : (
+            <HiMenu className="w-6 h-6" />
+          )}
+        </button>
 
-        {/* Logo */}
-        <div className="flex items-center gap-1">
-          <FcBrokenLink className="text-2xl hidden lg:block" />
-          <Link to="/" className="lg:text-2xl  font-bold">
+        <Link to="/" className="flex items-center gap-2">
+          <FcBrokenLink className="text-3xl hidden sm:block" />
+          <span className="text-xl sm:text-2xl font-extrabold tracking-tight">
             Smart<span className="text-[#023e8a]">Utility</span>
-          </Link>
-        </div>
+          </span>
+        </Link>
       </div>
 
-      {/* Navbar Center */}
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">{link}</ul>
+        <ul className="menu menu-horizontal px-1 gap-1">{links}</ul>
       </div>
 
-      {/* Navbar End */}
-      <div className="navbar-end">
+      <div className="navbar-end gap-3">
         <label className="swap swap-rotate">
-          {/* this hidden checkbox controls the state */}
           <input
             onChange={(e) => handleTheme(e.target.checked)}
             defaultChecked={localStorage.getItem("theme") === "dark"}
@@ -139,18 +112,16 @@ const Navbar = () => {
             value="synthwave"
           />
 
-          {/* sun icon */}
           <svg
-            className="swap-off h-10 w-10 fill-current"
+            className="swap-off h-7 w-7 fill-current text-yellow-500"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
           >
             <path d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z" />
           </svg>
 
-          {/* moon icon */}
           <svg
-            className="swap-on h-10 w-10 fill-current"
+            className="swap-on h-7 w-7 fill-current text-slate-200"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
           >
@@ -161,7 +132,6 @@ const Navbar = () => {
           <span className="loading loading-spinner text-info"></span>
         ) : user ? (
           <div className="flex items-center gap-3">
-            {/* Profile Image */}
             <div
               className="tooltip tooltip-bottom"
               data-tip={user.displayName || "User"}
@@ -174,33 +144,39 @@ const Navbar = () => {
                 className="w-10 h-10 rounded-full border-2 border-[#0077b6]"
               />
             </div>
-
-            {/* Logout Button */}
             <button
-              onClick={handleLogout}
-              className="btn bg-[#0077b6] text-white font-bold font-serif hover:scale-105"
-            >
-              Logout
-            </button>
+  onClick={handleLogout}
+  className="btn btn-sm px-4 rounded-full bg-gradient-to-r from-[#0077b6] to-[#00b4d8] text-white font-semibold font-serif shadow-md hover:shadow-lg hover:scale-105 active:scale-95 transition-all duration-200 border-none"
+>
+  Logout
+</button>
+
           </div>
         ) : (
           <>
             <Link
               to="/login"
               state={{ from: location.pathname }}
-              className="btn mr-2 bg-[#0077b6] text-white font-bold font-serif hover:scale-105"
+              className="btn btn-sm mr-2 bg-[#0077b6] text-white font-semibold font-serif hover:scale-105"
             >
               Login
             </Link>
             <Link
               to="/register"
-              className="btn bg-[#00b4d8] text-white font-bold font-serif hover:scale-105"
+              className="btn btn-sm bg-[#00b4d8] text-white font-semibold font-serif hover:scale-105"
             >
               Register
             </Link>
           </>
         )}
       </div>
+      {isOpen && (
+        <div className="w-full lg:hidden mt-2">
+          <ul className="menu bg-base-100 rounded-box shadow px-2 py-3 space-y-1">
+            {links}
+          </ul>
+        </div>
+      )}
     </div>
   );
 };

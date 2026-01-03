@@ -27,8 +27,8 @@ const MyPayBills = () => {
       `https://smart-utility-server.vercel.app/payments?email=${user.email}`
     )
       .then((res) => res.json())
-      .then((data) => {
-        setData(data);
+      .then((bills) => {
+        setData(bills);
         setLoading(false);
       })
       .catch((err) => {
@@ -37,12 +37,13 @@ const MyPayBills = () => {
       });
   }, [user, load]);
 
-  if (loading)
+  if (loading) {
     return (
-      <div className="conatiner mx-auto flex justify-center items-center">
+      <div className="conatiner mx-auto flex justify-center items-center h-64">
         <span className="loading loading-spinner text-info "></span>
       </div>
     );
+  }
 
   const totalBills = data.length;
   const totalAmount = data.reduce((acc, curr) => acc + Number(curr.amount), 0);
@@ -90,7 +91,7 @@ const MyPayBills = () => {
           method: "DELETE",
         })
           .then((res) => res.json())
-          .then(() => setLoad(!load));
+          .then(() => setLoad((prev) => !prev));
         Swal.fire("Deleted!", "Your file has been deleted.", "success");
       }
     });
@@ -113,8 +114,6 @@ const MyPayBills = () => {
       date: form.date.value,
     };
 
-    console.log(updatedBill);
-
     fetch(`https://smart-utility-server.vercel.app/bills/${selectedBill._id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
@@ -123,7 +122,7 @@ const MyPayBills = () => {
       .then((res) => res.json())
       .then(() => {
         toast.success("Bill updated successfully!");
-        setLoad(!load);
+        setLoad((prev) => !prev);
         setSelectedBill(null);
         document.getElementById("update_modal").close();
       })
@@ -137,47 +136,76 @@ const MyPayBills = () => {
       triggerOnce
       className="max-w-6xl mx-auto mt-8 px-4"
     >
-      <div>
-        <title>SmartUtility-MyBill</title>
-        <h1 className="text-2xl sm:text-3xl font-bold text-center mb-6">
-          My Paid <span className="text-[#023e8a]">Bills</span>
-        </h1>
+      <section className="relative rounded-3xl bg-gradient-to-br from-sky-50 via-white to-slate-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 px-4 sm:px-6 py-8 shadow-xl border border-slate-100/80 dark:border-slate-800/80">
+        {/* soft decoration */}
+        <div className="pointer-events-none absolute inset-0 -z-10 opacity-40">
+          <div className="absolute -top-10 right-10 w-40 h-40 rounded-full bg-sky-300/25 blur-3xl" />
+          <div className="absolute bottom-0 -left-10 w-52 h-52 rounded-full bg-cyan-400/20 blur-3xl" />
+        </div>
 
-        {/* Cards */}
-        <div className="flex flex-col md:flex-row gap-4 mb-6">
-          <div className="flex-1 flex items-center gap-4 bg-white rounded-lg shadow-lg p-5 min-w-[180px] dark:bg-black">
-            <FaUser className="text-blue-500 text-4xl sm:text-5xl" />
+        <title>SmartUtility-MyBill</title>
+
+        {/* Header */}
+        <div className="text-center mb-6">
+          <p className="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-white/80 dark:bg-slate-900/80 border border-sky-100/70 dark:border-slate-700 text-xs sm:text-sm font-medium text-sky-700 dark:text-sky-300 shadow-sm">
+            📊 Your payment history
+          </p>
+          <h1 className="mt-4 text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">
+            My Paid <span className="text-[#023e8a]">Bills</span>
+          </h1>
+          <p className="mt-2 text-gray-600 dark:text-gray-300 text-sm sm:text-base max-w-xl mx-auto">
+            View a summary of your paid bills, download reports, and update or
+            delete entries when necessary.
+          </p>
+        </div>
+
+        {/* Summary Cards */}
+        <div className="flex flex-col md:flex-row gap-4 mb-7">
+          <div className="flex-1 flex items-center gap-4 bg-white/85 dark:bg-slate-900/85 rounded-2xl shadow-md border border-slate-100/80 dark:border-slate-700/80 p-5 min-w-[180px]">
+            <div className="flex items-center justify-center w-12 h-12 rounded-2xl bg-sky-50 dark:bg-sky-900/40">
+              <FaUser className="text-blue-500 text-2xl" />
+            </div>
             <div className="flex flex-col justify-center">
-              <p className="text-sm sm:text-base text-gray-500">Bills</p>
-              <p className="text-xl sm:text-2xl font-semibold">{totalBills}</p>
+              <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">
+                Bills
+              </p>
+              <p className="text-xl sm:text-2xl font-semibold text-slate-900 dark:text-white">
+                {totalBills}
+              </p>
             </div>
           </div>
-          <div className="flex-1 flex items-center gap-4 bg-white rounded-lg shadow-lg p-5 min-w-[180px] dark:bg-black">
-            <FaMoneyBill className="text-green-700 text-4xl sm:text-5xl" />
+
+          <div className="flex-1 flex items-center gap-4 bg-white/85 dark:bg-slate-900/85 rounded-2xl shadow-md border border-slate-100/80 dark:border-slate-700/80 p-5 min-w-[180px]">
+            <div className="flex items-center justify-center w-12 h-12 rounded-2xl bg-emerald-50 dark:bg-emerald-900/40">
+              <FaMoneyBill className="text-green-700 text-2xl" />
+            </div>
             <div className="flex flex-col justify-center">
-              <p className="text-sm sm:text-base text-gray-500">Total Paid</p>
-              <p className="text-xl sm:text-2xl font-semibold">
+              <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">
+                Total Paid
+              </p>
+              <p className="text-xl sm:text-2xl font-semibold text-slate-900 dark:text-white">
                 ৳{totalAmount.toLocaleString()}
               </p>
             </div>
           </div>
+
           <button
             onClick={handleDownloadPDF}
-            className="flex-1 flex items-center justify-center gap-2 bg-[#0077b6] hover:bg-[#005f8c] transition px-5 py-3 rounded-lg text-white font-medium shadow-lg min-w-[180px]"
+            className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-[#0077b6] to-[#00b4d8] hover:brightness-110 transition px-5 py-3 rounded-2xl text-white font-medium shadow-md min-w-[180px] text-sm sm:text-base"
           >
-            <FaFilePdf size={20} /> Download PDF
+            <FaFilePdf size={18} /> Download PDF
           </button>
         </div>
 
-        {/* Table */}
-        <div className="hidden md:block overflow-x-auto rounded-lg shadow-lg bg-white ">
+        {/* Desktop Table */}
+        <div className="hidden md:block overflow-x-auto rounded-2xl shadow-lg bg-white/90 dark:bg-slate-900/90 border border-slate-100/80 dark:border-slate-800/80">
           {data.length === 0 ? (
-            <p className="text-center p-10 text-gray-500 text-sm dark:text-white">
+            <p className="text-center p-10 text-gray-500 text-sm dark:text-gray-300">
               No payments found.
             </p>
           ) : (
             <table className="w-full min-w-max table-auto text-sm border-collapse">
-              <thead className="bg-blue-100 sticky top-0 z-10 dark:bg-black dark:hover:bg-black">
+              <thead className="bg-sky-50 dark:bg-slate-800">
                 <tr>
                   {[
                     "Username",
@@ -189,37 +217,61 @@ const MyPayBills = () => {
                     "Date",
                     "Actions",
                   ].map((header) => (
-                    <th key={header} className="px-4 py-3 text-left">
+                    <th
+                      key={header}
+                      className="px-4 py-3 text-left text-xs font-semibold text-slate-700 dark:text-gray-200"
+                    >
                       {header}
                     </th>
                   ))}
                 </tr>
               </thead>
               <tbody>
-                {data.map((bill) => (
-                  <tr key={bill._id} className="hover:bg-blue-50 transition dark:bg-black dark:hover:bg-black">
-                    <td className="border-t px-4 py-3">{bill.username}</td>
-                    <td className="border-t px-4 py-3">{bill.email}</td>
-                    <td className="border-t px-4 py-3 text-green-700 font-semibold">
+                {data.map((bill, idx) => (
+                  <tr
+                    key={bill._id}
+                    className={`${
+                      idx % 2 === 0
+                        ? "bg-white/80 dark:bg-slate-900/80"
+                        : "bg-slate-50/80 dark:bg-slate-900/60"
+                    } hover:bg-sky-50/80 dark:hover:bg-slate-800/80 transition`}
+                  >
+                    <td className="border-t border-slate-100 dark:border-slate-800 px-4 py-3">
+                      {bill.username}
+                    </td>
+                    <td className="border-t border-slate-100 dark:border-slate-800 px-4 py-3">
+                      {bill.email}
+                    </td>
+                    <td className="border-t border-slate-100 dark:border-slate-800 px-4 py-3 text-emerald-700 dark:text-emerald-400 font-semibold">
                       ৳{bill.amount}
                     </td>
-                    <td className="border-t px-4 py-3">{bill.category}</td>
-                    <td className="border-t px-4 py-3">{bill.address}</td>
-                    <td className="border-t px-4 py-3">{bill.phone}</td>
-                    <td className="border-t px-4 py-3">{bill.date}</td>
-                    <td className="border-t px-4 py-3 flex flex-col sm:flex-row sm:items-center gap-2">
-                      <button
-                        onClick={() => handleUpdateClick(bill)}
-                        className="flex items-center gap-1 bg-[#0096d6] text-white  hover:bg-[#0077b6] dark:hover:bg-black px-3 py-1 rounded"
-                      >
-                        <FaEdit /> Update
-                      </button>
-                      <button
-                        onClick={() => deleteItems(bill._id)}
-                        className="flex items-center gap-1 bg-red-500 text-white hover:bg-red-600 px-3 py-1 rounded"
-                      >
-                        <FaTrash /> Delete
-                      </button>
+                    <td className="border-t border-slate-100 dark:border-slate-800 px-4 py-3">
+                      {bill.category}
+                    </td>
+                    <td className="border-t border-slate-100 dark:border-slate-800 px-4 py-3">
+                      {bill.address}
+                    </td>
+                    <td className="border-t border-slate-100 dark:border-slate-800 px-4 py-3">
+                      {bill.phone}
+                    </td>
+                    <td className="border-t border-slate-100 dark:border-slate-800 px-4 py-3">
+                      {bill.date}
+                    </td>
+                    <td className="border-t border-slate-100 dark:border-slate-800 px-4 py-3">
+                      <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+                        <button
+                          onClick={() => handleUpdateClick(bill)}
+                          className="flex items-center gap-1 bg-[#0096d6] text-white hover:bg-[#0077b6] px-3 py-1 rounded-md text-xs font-medium"
+                        >
+                          <FaEdit /> Update
+                        </button>
+                        <button
+                          onClick={() => deleteItems(bill._id)}
+                          className="flex items-center gap-1 bg-red-500 text-white hover:bg-red-600 px-3 py-1 rounded-md text-xs font-medium"
+                        >
+                          <FaTrash /> Delete
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))}
@@ -228,38 +280,51 @@ const MyPayBills = () => {
           )}
         </div>
 
-        {/* Mobile view */}
-        <div className="md:hidden flex flex-col gap-4">
+        {/* Mobile Cards */}
+        <div className="md:hidden flex flex-col gap-4 mt-4">
           {data.length === 0 ? (
-            <p className="text-center p-6 text-gray-500 text-sm">
+            <p className="text-center p-6 text-gray-500 text-sm dark:text-gray-300">
               No payments found.
             </p>
           ) : (
             data.map((bill) => (
               <div
                 key={bill._id}
-                className="bg-white rounded-lg shadow-lg p-4 flex flex-col gap-2"
+                className="bg-white/90 dark:bg-slate-900/90 rounded-2xl shadow-md border border-slate-100/80 dark:border-slate-800/80 p-4 flex flex-col gap-2"
               >
-                <div className="flex justify-between">
-                  <span className="font-semibold">{bill.username}</span>
-                  <span className="text-green-700 font-semibold">
+                <div className="flex justify-between items-center">
+                  <span className="font-semibold text-slate-900 dark:text-white">
+                    {bill.username}
+                  </span>
+                  <span className="text-emerald-700 dark:text-emerald-400 font-semibold">
                     ৳{bill.amount}
                   </span>
                 </div>
-                <div className="text-gray-500 text-sm">{bill.email}</div>
-                <div className="text-gray-500 text-sm">{bill.address}</div>
-                <div className="text-gray-500 text-sm">{bill.phone}</div>
-                <div className="text-gray-500 text-sm">{bill.date}</div>
-                <div className="flex gap-2 mt-2">
+                <div className="text-gray-500 dark:text-gray-300 text-sm">
+                  {bill.email}
+                </div>
+                <div className="text-gray-500 dark:text-gray-300 text-sm">
+                  {bill.category}
+                </div>
+                <div className="text-gray-500 dark:text-gray-300 text-sm">
+                  {bill.address}
+                </div>
+                <div className="text-gray-500 dark:text-gray-300 text-sm">
+                  {bill.phone}
+                </div>
+                <div className="text-gray-500 dark:text-gray-300 text-sm">
+                  {bill.date}
+                </div>
+                <div className="flex gap-2 mt-3">
                   <button
                     onClick={() => handleUpdateClick(bill)}
-                    className="flex-1 flex items-center justify-center gap-1 bg-[#0096d6] text-white hover:bg-[#0077b6] px-3 py-2 rounded"
+                    className="flex-1 flex items-center justify-center gap-1 bg-[#0096d6] text-white hover:bg-[#0077b6] px-3 py-2 rounded-md text-xs font-medium"
                   >
                     <FaEdit /> Update
                   </button>
                   <button
                     onClick={() => deleteItems(bill._id)}
-                    className="flex-1 flex items-center justify-center gap-1 bg-red-500 text-white hover:bg-red-600 px-3 py-2 rounded"
+                    className="flex-1 flex items-center justify-center gap-1 bg-red-500 text-white hover:bg-red-600 px-3 py-2 rounded-md text-xs font-medium"
                   >
                     <FaTrash /> Delete
                   </button>
@@ -274,8 +339,8 @@ const MyPayBills = () => {
           id="update_modal"
           className="modal modal-bottom sm:modal-middle"
         >
-          <div className="modal-box">
-            <h3 className="font-bold text-lg mb-4 text-center text-[#0077b6]">
+          <div className="modal-box bg-white dark:bg-slate-900 rounded-2xl shadow-2xl">
+            <h3 className="font-bold text-xl mb-4 text-center text-[#0077b6]">
               Update Bill
             </h3>
 
@@ -284,37 +349,39 @@ const MyPayBills = () => {
                 onSubmit={handleUpdateSubmit}
                 className="flex flex-col gap-3"
               >
-                {/* Username */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">
-                    Username
-                  </label>
-                  <input
-                    type="text"
-                    name="username"
-                    defaultValue={selectedBill.username}
-                    required
-                    className="input input-bordered w-full mt-1"
-                  />
-                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {/* Username */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
+                      Username
+                    </label>
+                    <input
+                      type="text"
+                      name="username"
+                      defaultValue={selectedBill.username}
+                      required
+                      className="input input-bordered w-full mt-1"
+                    />
+                  </div>
 
-                {/* Amount */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">
-                    Amount (BDT)
-                  </label>
-                  <input
-                    type="number"
-                    name="amount"
-                    defaultValue={selectedBill.amount}
-                    required
-                    className="input input-bordered w-full mt-1"
-                  />
+                  {/* Amount */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
+                      Amount (BDT)
+                    </label>
+                    <input
+                      type="number"
+                      name="amount"
+                      defaultValue={selectedBill.amount}
+                      required
+                      className="input input-bordered w-full mt-1"
+                    />
+                  </div>
                 </div>
 
                 {/* Address */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
                     Address
                   </label>
                   <input
@@ -328,7 +395,7 @@ const MyPayBills = () => {
 
                 {/* Phone */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
                     Phone
                   </label>
                   <input
@@ -342,7 +409,7 @@ const MyPayBills = () => {
 
                 {/* Date */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
                     Date
                   </label>
                   <input
@@ -354,10 +421,10 @@ const MyPayBills = () => {
                 </div>
 
                 {/* Actions */}
-                <div className="modal-action flex justify-end gap-2">
+                <div className="modal-action flex justify-end gap-2 mt-2">
                   <button
                     type="button"
-                    className="btn btn-outline"
+                    className="btn btn-outline btn-sm md:btn-md"
                     onClick={() => {
                       document.getElementById("update_modal").close();
                       setSelectedBill(null);
@@ -367,7 +434,7 @@ const MyPayBills = () => {
                   </button>
                   <button
                     type="submit"
-                    className="btn bg-[#0077b6] text-white hover:bg-[#005f8c]"
+                    className="btn btn-sm md:btn-md bg-gradient-to-r from-[#0077b6] to-[#00b4d8] text-white border-none hover:opacity-90"
                   >
                     Update
                   </button>
@@ -376,7 +443,7 @@ const MyPayBills = () => {
             )}
           </div>
         </dialog>
-      </div>
+      </section>
     </Slide>
   );
 };
